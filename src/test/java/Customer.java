@@ -115,7 +115,7 @@ public class Customer {
                                 "{\"id\":" + properties.getProperty("id") + ",\n" +
                                 "    \"name\":\"" + properties.getProperty("name") + "\", \n" +
                                 "    \"email\":\"" + properties.getProperty("email") + "\",\n" +
-                                "    \"address\":\""+ properties.getProperty("address")+"\",\n" +
+                                "    \"address\":\"" + properties.getProperty("address") + "\",\n" +
                                 "    \"phone_number\":\"" + properties.getProperty("phone_number") + "\"}")
                         .when()
                         .post("/customer/api/v1/create")

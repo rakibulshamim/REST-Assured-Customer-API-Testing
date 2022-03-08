@@ -72,4 +72,56 @@ public class Customer {
         Assert.assertEquals("Mr. Kamal", name);
         System.out.println(response.asString());
     }
+
+    public Integer ID;
+    public String name;
+    public String email;
+    public String address;
+    public String phone_number;
+
+    public void GenerateCustomer() throws IOException, ConfigurationException {
+        properties.load(file);
+        RestAssured.baseURI = "https://randomuser.me";
+        Response response =
+                given()
+                        .contentType("application/json")
+                        .when()
+                        .get("/api")
+                        .then()
+                        .assertThat().statusCode(200).extract().response();
+
+        JsonPath resObj = response.jsonPath();
+        ID = (int) Math.floor(Math.random() * (999999 - 100000) + 1);
+        name = resObj.get("results[0].name.first");
+        email = resObj.get("results[0].email");
+        address = resObj.get("results[0].location.state");
+        phone_number = resObj.get("results[0].cell");
+        Utils.setEnvVariable("id", ID.toString());
+        Utils.setEnvVariable("name", name);
+        Utils.setEnvVariable("email", email);
+        Utils.setEnvVariable("address", address);
+        Utils.setEnvVariable("phone_number", phone_number);
+        System.out.println(response.asString());
+    }
+
+    public void createCustomer() throws IOException {
+        properties.load(file);
+        RestAssured.baseURI = properties.getProperty("baseUrl");
+        Response response =
+                given()
+                        .contentType("application/json")
+                        .header("Authorization", properties.getProperty("token"))
+                        .body("" +
+                                "{\"id\":" + properties.getProperty("id") + ",\n" +
+                                "    \"name\":\"" + properties.getProperty("name") + "\", \n" +
+                                "    \"email\":\"" + properties.getProperty("email") + "\",\n" +
+                                "    \"address\":\""+ properties.getProperty("address")+"\",\n" +
+                                "    \"phone_number\":\"" + properties.getProperty("phone_number") + "\"}")
+                        .when()
+                        .post("/customer/api/v1/create")
+                        .then()
+                        .assertThat().statusCode(201).extract().response();
+
+        System.out.println(response.asString());
+    }
 }

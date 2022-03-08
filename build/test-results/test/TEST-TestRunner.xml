@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TestRunner" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-03-08T20:17:47" hostname="SHAMIM" time="4.903">
+<testsuite name="TestRunner" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-03-08T21:08:37" hostname="SHAMIM" time="4.456">
   <properties/>
-  <testcase name="searchCustomer" classname="TestRunner" time="4.903"/>
-  <system-out><![CDATA[{"id":101,"name":"Mr. Kamal","email":"mrkamal@test.com","address":"Gulshan,Dhaka","phone_number":"01502020110"}
+  <testcase name="createCustomer" classname="TestRunner" time="4.456"/>
+  <system-out><![CDATA[{"message":"Success","Customers":{"id":86309,"name":"Aino","email":"aino.kumpula@example.com","address":"Tavastia Proper","phone_number":"042-859-09-98"}}
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

@@ -21,4 +21,15 @@ public class TestRunner {
         Customer customer = new Customer();
         customer.searchCustomer();
     }
+    @Test
+    public void GenerateCustomer() throws IOException, ConfigurationException {
+        Customer customer = new Customer();
+        customer.GenerateCustomer();
+
+    }
+    @Test
+    public void createCustomer() throws IOException {
+        Customer customer = new Customer();
+        customer.createCustomer();
+    }
 }

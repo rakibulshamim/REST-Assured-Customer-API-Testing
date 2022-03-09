@@ -1,3 +1,5 @@
+package Utils;
+
 import org.apache.commons.configuration.*;
 
 public class Utils {

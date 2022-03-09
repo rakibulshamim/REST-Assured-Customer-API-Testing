@@ -1,8 +1,11 @@
+package Pages;
+
+import Utils.Utils;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.apache.commons.configuration.ConfigurationException;
-import org.junit.Assert;
+import org.testng.Assert;
 
 import java.io.*;
 import java.util.Properties;
@@ -63,13 +66,13 @@ public class Customer {
                         .contentType("application/json")
                         .header("Authorization", properties.getProperty("token"))
                         .when()
-                        .get("/customer/api/v1/get/101")
+                        .get("/customer/api/v1/get/102")
                         .then()
                         .assertThat().statusCode(200).extract().response();
 
         JsonPath resObj = response.jsonPath();
         String name = resObj.get("name");
-        Assert.assertEquals("Mr. Kamal", name);
+        Assert.assertEquals("Mr. Jamal Islam", name);
         System.out.println(response.asString());
     }
 
@@ -122,6 +125,53 @@ public class Customer {
                         .then()
                         .assertThat().statusCode(201).extract().response();
 
+        JsonPath resObj = response.jsonPath();
+        String message = resObj.get("message");
+        Assert.assertEquals("Success", message);
+        System.out.println(response.asString());
+    }
+
+    public void updateCustomerInfo() throws IOException {
+        properties.load(file);
+        RestAssured.baseURI = properties.getProperty("baseUrl");
+        Response response =
+                given()
+                        .contentType("application/json")
+                        .header("Authorization", properties.getProperty("token"))
+                        .body("{\n" +
+                                "    \"id\": 102,\n" +
+                                "    \"name\": \"Mr. Rahim Islam\",\n" +
+                                "    \"email\": \"mrjamal@test.com\",\n" +
+                                "    \"address\": \"Mirpur,Dhaka\",\n" +
+                                "    \"phone_number\": \"01502020110\"\n" +
+                                "}")
+                        .when()
+                        .put("/customer/api/v1/update/102")
+                        .then()
+                        .assertThat().statusCode(200).extract().response();
+
+        JsonPath resObj = response.jsonPath();
+        String message = resObj.get("message");
+        Assert.assertEquals("Success", message);
+        System.out.println(response.asString());
+    }
+
+    public void deleteCustomer() throws IOException {
+        properties.load(file);
+        RestAssured.baseURI = properties.getProperty("baseUrl");
+        String id = properties.getProperty("id");
+        Response response =
+                given()
+                        .contentType("application/json")
+                        .header("Authorization", properties.getProperty("token"))
+                        .when()
+                        .delete("/customer/api/v1/delete/"+id)
+                        .then()
+                        .assertThat().statusCode(200).extract().response();
+
+        JsonPath resObj = response.jsonPath();
+        String message = resObj.get("message");
+        Assert.assertEquals("Customer deleted!", message);
         System.out.println(response.asString());
     }
 }

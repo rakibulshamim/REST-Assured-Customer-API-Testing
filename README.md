@@ -1,6 +1,6 @@
 # REST-Assured-Customer-API-Testing
 
-A testing repository using REST Assured and TestNG to Automate Customer API and its suite of applications.
+A testing repository using **REST Assured** and **TestNG** to Automate Customer API and its suite of applications.
 
 
 1. [Technology](#technology)

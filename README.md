@@ -37,3 +37,11 @@ allure generate allure-results --clean -o allure-report
 ```
 allure serve allure-results
 ```
+
+### Reports View
+These are the screenshots of **Allure** reports:
+
+![image](https://user-images.githubusercontent.com/36601919/157725835-f5fdc5cc-1705-4bef-9b84-2d1af6764b2a.png)
+
+![image](https://user-images.githubusercontent.com/36601919/157726249-82a3238f-981c-4cd0-b59a-3746f823c59f.png)
+
